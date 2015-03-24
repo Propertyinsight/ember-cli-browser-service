@@ -6,6 +6,14 @@ export default Ember.Controller.extend({
 
     detect: function() {
         return this.get('browser').detect();
-    }.property()
+    }.property(),
+
+    agent: function() {
+        return this.get('browser').agent();
+    }.property(),
+
+    version: function() {
+        return this.get('browser').version();
+    }.property()    
 
 });

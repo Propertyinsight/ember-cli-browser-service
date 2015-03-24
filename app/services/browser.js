@@ -24,7 +24,46 @@ export default Ember.Service.extend({
                 return M.join(' ');
             })());
 
+            // Sample values:
+            //
+            // MSIE 8
+            // MSIE 9 
+            // MSIE 10 
+            // IE 11 
+            // Chrome 41 
+            // Chrome 42 (using 42 Beta)
+            // Chrome 43 (using 43 Dev)
+            // Firefox 35
+            // Firefox 37 (using 37 Beta)
+            // Firefox 3 (usng 3.6)
+            // Safari 8 
+            // Safari 6 (using 6.1)
+            // Safari 8 (using iPhone 6)
+            // Chrome 4 (Samsung S5 native browser)
+            // Opera 27
+
         return this.get('_detection');
+    },
+
+    agent: function() {
+        var a = this.detect().split(' ')[0];
+        if (a === 'MSIE')
+            a = 'IE';
+
+        return a;
+    },
+
+    version: function() {
+        var parts = this.detect().split(' ');
+        if (parts.length < 2)
+            return 0;
+
+
+        var matches = parts[1].match(/\d+/);
+        if (!matches || matches.length < 1)
+            return 0;
+
+        return parseInt(matches[0], 10);
     }
 
 });
