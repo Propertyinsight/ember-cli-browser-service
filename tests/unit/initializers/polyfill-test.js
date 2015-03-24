@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { initialize } from '../../../initializers/browser-service';
+import { initialize } from '../../../initializers/polyfill';
 import { module, test } from 'qunit';
 
 var container, application;
 
-module('BrowserServiceInitializer', {
+module('PolyfillInitializer', {
   beforeEach: function() {
     Ember.run(function() {
       application = Ember.Application.create();

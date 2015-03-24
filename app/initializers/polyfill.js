@@ -1,6 +1,5 @@
-export function initialize(/* container, application */) {
-
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
+var functionBind = function(){
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
     if (!Function.prototype.bind) {
         Function.prototype.bind = function(oThis) {
             if (typeof this !== 'function') {
@@ -25,9 +24,13 @@ export function initialize(/* container, application */) {
             return fBound;
         };
     }
+};
+
+export function initialize(/* container, application */) {
+    functionBind();
 }
 
 export default {
-  name: 'browser-service',
+  name: 'polyfill',
   initialize: initialize
 };
