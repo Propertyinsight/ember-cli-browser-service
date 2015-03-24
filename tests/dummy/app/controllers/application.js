@@ -2,6 +2,16 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+    init: function() {
+        this._super.apply(this, arguments);
+
+        setTimeout(function(){
+            this.set('functionBindWorks', true);
+        }.bind(this), 1000);
+    },
+
+    functionBindWorks: false,
+
     browser: Ember.inject.service(),
 
     detect: function() {
@@ -14,6 +24,6 @@ export default Ember.Controller.extend({
 
     version: function() {
         return this.get('browser').version();
-    }.property()    
+    }.property()
 
 });
