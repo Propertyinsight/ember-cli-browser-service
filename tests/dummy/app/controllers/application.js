@@ -1,29 +1,27 @@
 import Ember from 'ember';
+var computed = Ember.computed;
 
 export default Ember.Controller.extend({
+  browser: Ember.inject.service(),
+  functionBindWorks: false,
 
-    init: function() {
-        this._super.apply(this, arguments);
+  init: function() {
+    this._super.apply(this, arguments);
 
-        setTimeout(function(){
-            this.set('functionBindWorks', true);
-        }.bind(this), 1000);
-    },
+    setTimeout(function() {
+      this.set('functionBindWorks', true);
+    }.bind(this), 1000);
+  },
 
-    functionBindWorks: false,
+  detect: computed(function(){
+    return this.get('browser').detect();
+  }),
 
-    browser: Ember.inject.service(),
+  agent: computed(function(){
+    return this.get('browser').agent();
+  }),
 
-    detect: function() {
-        return this.get('browser').detect();
-    }.property(),
-
-    agent: function() {
-        return this.get('browser').agent();
-    }.property(),
-
-    version: function() {
-        return this.get('browser').version();
-    }.property()
-
+  version: computed(function(){
+    return this.get('browser').version();
+  })
 });
